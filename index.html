@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ZurnaMail - yerlivilli.work.gd</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        body { background-color: #0f172a; color: #f8fafc; display: flex; height: 100vh; overflow: hidden; }
+        
+        /* Kenar Çubuğu */
+        .sidebar { width: 260px; background-color: #1e293b; border-right: 1px solid #334155; display: flex; flex-direction: column; }
+        .logo-area { padding: 20px; font-size: 1.2rem; font-weight: bold; color: #38bdf8; border-bottom: 1px solid #334155; display: flex; align-items: center; gap: 10px; }
+        .nav-links { list-style: none; padding: 20px 10px; }
+        .nav-links li { padding: 12px 15px; border-radius: 8px; cursor: pointer; margin-bottom: 5px; color: #94a3b8; transition: 0.2s; }
+        .nav-links li:hover, .nav-links li.active { background-color: #0284c7; color: #fff; }
+
+        /* Ana İçerik Alanı */
+        .main-content { flex: 1; display: flex; flex-direction: column; background-color: #0f172a; }
+        .header { padding: 20px; border-bottom: 1px solid #334155; display: flex; justify-content: space-between; align-items: center; background: #1e293b; }
+        .domain-badge { background: #0284c7; padding: 5px 12px; border-radius: 20px; font-size: 0.85rem; font-weight: 600; }
+
+        /* E-Posta Listesi ve Okuma Bölmesi */
+        .content-body { display: flex; flex: 1; overflow: hidden; }
+        .email-list { width: 350px; border-right: 1px solid #334155; overflow-y: auto; }
+        .email-item { padding: 15px; border-bottom: 1px solid #334155; cursor: pointer; transition: 0.2s; }
+        .email-item:hover { background-color: #1e293b; }
+        .email-item.unread { background-color: #1e293b88; border-left: 4px solid #38bdf8; }
+        .sender { font-weight: bold; font-size: 0.95rem; margin-bottom: 4px; }
+        .subject { font-size: 0.85rem; color: #94a3b8; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+        .email-reader { flex: 1; padding: 30px; overflow-y: auto; background-color: #0b0f19; }
+        .reader-placeholder { color: #64748b; text-align: center; margin-top: 100px; font-size: 1.1rem; }
+    </style>
+</head>
+<body>
+
+    <!-- Sol Menü -->
+    <div class="sidebar">
+        <div class="logo-area">
+            🎺 ZurnaMail
+        </div>
+        <ul class="nav-links">
+            <li class="active">Gelen Kutusu (Inbox)</li>
+            <li>Gönderilenler</li>
+            <li>Taslaklar</li>
+            <li>Çöp Kutusu</li>
+        </ul>
+    </div>
+
+    <!-- Sağ Taraf / Ana Ekran -->
+    <div class="main-content">
+        <div class="header">
+            <h2>Gelen Kutusu</h2>
+            <div class="domain-badge">@yerlivilli.work.gd</div>
+        </div>
+
+        <div class="content-body">
+            <!-- Gelen Maillerin Listesi -->
+            <div class="email-list">
+                <div class="email-item unread" onclick="readEmail('Sistem Yöneticisi', 'GitHub Pages Aktif!', 'Projeniz GitHub Pages üzerinden yerlivilli.work.gd altyapısıyla yayına alındı.')">
+                    <div class="sender">Sistem Yöneticisi</div>
+                    <div class="subject">GitHub Pages Aktif!</div>
+                </div>
+                <div class="email-item" onclick="readEmail('Muhammed Ali', 'Test Mesajı', 'Harika bir iş çıkardık, sistem kusursuz çalışıyor.')">
+                    <div class="sender">Muhammed Ali</div>
+                    <div class="subject">Test Mesajı</div>
+                </div>
+            </div>
+
+            <!-- Mail Okuma Alanı -->
+            <div class="email-reader" id="reader">
+                <div class="reader-placeholder">Okumak için soldan bir e-posta seçin.</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function readEmail(sender, subject, body) {
+            const reader = document.getElementById('reader');
+            reader.innerHTML = `
+                <h3 style="margin-bottom: 10px; color: #38bdf8;">${subject}</h3>
+                <p style="font-size: 0.9rem; color: #94a3b8; margin-bottom: 20px;">Kimden: <strong>${sender}</strong></p>
+                <hr style="border: 0; border-top: 1px solid #334155; margin-bottom: 20px;">
+                <p style="line-height: 1.6; color: #e2e8f0;">${body}</p>
+            `;
+        }
+    </script>
+</body>
+</html>
